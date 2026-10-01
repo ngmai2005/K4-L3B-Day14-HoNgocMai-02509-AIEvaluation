@@ -6,6 +6,22 @@ Tài liệu này định nghĩa 6 mốc tiến độ (Checkpoints CP0–CP5) tro
 
 ## Bảng tổng quan tiến độ (Schedule)
 
+### Trạng thái kiểm tra ngày 01/10/2026
+
+| CP | Trạng thái thực tế | Evidence |
+|---|---|---|
+| CP0 | Môi trường/dependencies dùng được; API chưa đạt | `.venv` chạy tests/validator; OpenRouter HTTP 401 ở E01 |
+| CP1 | Hoàn thành | Data models/overall mean đã implement, tests pass |
+| CP2 | Hoàn thành core | Metrics và judge parsing/bias được unit test; chưa gọi judge LLM thật |
+| CP3 | Hoàn thành | Runner/analyzer/regression: full suite 42 passed |
+| CP4 | Dataset/rubric hoàn thành; full benchmark bị chặn | Validator PASS, 20 QA 5/7/5/3, coverage 10/10; `exercises.md` có rubric và retrieval diagnostic |
+| CP5 | Core đồng bộ, Markdown có bản nháp offline; chưa nghiệm thu cuối | `reflection.md` có ba retrieval-risk analyses và regression; thiếu failures từ benchmark thật |
+
+42 failed baseline là kỳ vọng starter, không phải kết quả đã đo lại hiện tại.
+Không đánh dấu CP4/CP5 hoàn thành khi chưa có generation/benchmark hợp lệ.
+`build_checkpoint_docs.py` tái tạo diagnostic offline và **ghi đè** `exercises.md`,
+`reflection.md`; không chạy sau khi đã bổ sung benchmark thật bằng tay.
+
 | Checkpoint | Khoảng thời gian | Mốc thời gian mẫu | Nội dung trọng tâm | Kết quả kiểm tra chính |
 |---|---|---|---|---|
 | **CP0** Setup | Start + 0–15m | 9:15–9:30 | Môi trường, `.env`, baseline tests | 42 failed baseline |

@@ -36,6 +36,20 @@ Hạn nộp mặc định: **23h59 ngày lab (GMT+7)**; coach có thể gia hạ
 
 ## Yêu cầu & Quick Start
 
+### Kết quả kiểm tra ngày 01/10/2026
+
+Core: **42 tests pass**. Dataset: **PASS**, 20 QA phân bổ 5/7/5/3, coverage 10/10.
+Trạng thái từng checkpoint nằm trong `CHECKPOINTS.md`. Generation bị chặn bởi
+OpenRouter HTTP 401; full benchmark chưa hoàn thành.
+
+`build_checkpoint_docs.py` tạo retrieval diagnostic offline và bản nháp
+`exercises.md`/`reflection.md`. Nó **ghi đè** hai Markdown; không chạy sau khi đã
+bổ sung benchmark thật. Diagnostic không sinh hoặc chứa actual answers.
+
+Generation hỗ trợ OpenAI Responses và OpenRouter Chat Completions. Với OpenRouter,
+đặt `OPENAI_BASE_URL=https://openrouter.ai/api/v1`, key OpenRouter hợp lệ trong
+`OPENAI_API_KEY`, model như `openai/gpt-4o-mini`. Xem `.env.example`.
+
 **Yêu cầu:** Python 3.11 trở lên. Cần **OpenAI API key** để chạy `domain_assistant.py` (Part 3 — sinh 20 actual answers từ RAG thật); phần code core (`template.py`, Part 1–2) không cần API key.
 
 ```bash

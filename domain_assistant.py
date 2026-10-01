@@ -251,9 +251,23 @@ class OpenAIGenerator:
         if not self.model:
             raise RuntimeError("OPENAI_MODEL is missing from .env")
         self.client = OpenAI(api_key=api_key)
+        self.is_openrouter = self.client.base_url.host == "openrouter.ai"
+        if self.is_openrouter and "/" not in self.model:
+            self.model = f"openai/{self.model}"
         self.max_output_tokens = max_output_tokens
 
     def generate(self, prompt: str) -> str:
+        if self.is_openrouter:
+            completion = self.client.chat.completions.create(
+                model=self.model,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0,
+                max_tokens=self.max_output_tokens,
+            )
+            answer = (completion.choices[0].message.content or "").strip()
+            if not answer:
+                raise RuntimeError("OpenRouter returned an empty answer")
+            return answer
         response = self.client.responses.create(
             model=self.model,
             input=prompt,
@@ -510,6 +524,20 @@ def main() -> int:
         )
     except (OSError, OpenAIError, TypeError, ValueError, RuntimeError) as exc:
         print(f"ERROR: {exc}")
+        if isinstance(exc, OpenAIError) and getattr(exc, "code", None) in {
+            "credit_balance_exhausted",
+            "insufficient_quota",
+        }:
+            print(
+                "API billing/quota blocked generation. Check credits and usage "
+                "limits for the organization associated with OPENAI_API_KEY: "
+                "https://platform.openai.com/settings/organization/billing/"
+            )
+            print(
+                "After restoring API access (or configuring a funded API key), "
+                "rerun this command. Retrying or changing OPENAI_MODEL does "
+                "not resolve exhausted credits. No new answer artifact was saved."
+            )
         return 2
     print(f"Generated {len(artifact['answers'])} actual answers: {output}")
     return 0

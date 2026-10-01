@@ -48,18 +48,26 @@ Các file sinh ra trong quá trình chạy (artifacts) là tùy chọn (optional
 Hãy chạy các kiểm tra sau và tích chọn đầy đủ trước khi nộp bài:
 
 - [ ] Repository đã được đặt đúng tên chuẩn: `K4-L3B-<HoVaTen>-<MSSV>-AIEvaluation`.
-- [ ] Chạy `python validate_golden_dataset.py` báo `PASS`.
-- [ ] Toàn bộ required tests pass khi chạy `pytest tests/ -v` (41 passed, 1 skipped nếu không làm bonus).
-- [ ] `golden_dataset.json` đủ 20 QA (5 Easy + 7 Medium + 5 Hard + 3 Adversarial).
+- [x] Chạy `python validate_golden_dataset.py` báo `PASS`.
+- [x] Toàn bộ required tests pass: **42 passed**, gồm test helper reranking.
+- [x] `golden_dataset.json` đủ 20 QA (5 Easy + 7 Medium + 5 Hard + 3 Adversarial).
 - [ ] Đã kiểm tra `artifacts/actual_answers.json` sau khi chạy RAG (`python domain_assistant.py`).
 - [ ] `exercises.md` đã hoàn thành đầy đủ: Exercise 3.2 có đủ năm metrics và ba cases thấp nhất; Exercise 3.3 có rubric 1–5 và edge cases (Exercise 3.4 & 3.5 nếu chọn làm bonus).
 - [ ] `reflection.md` có ba 5 Whys analyses, bảng failure taxonomy và improvement log / regression strategy.
-- [ ] `solution/solution.py` là bản hoàn thiện của `template.py` (học viên đã copy sau khi hoàn thành code).
+- [x] `solution/solution.py` và `template.py` là hai bản hoàn thiện đồng bộ.
 - [ ] Không commit `.env`, API key hoặc dữ liệu nhạy cảm lên GitHub.
 
 ---
 
 ## Tài liệu liên quan
+
+Ghi nhận 01/10/2026: code/dataset đạt kiểm tra, nhưng OpenRouter HTTP 401 tại E01
+chặn actual answers và benchmark. Markdown có lý thuyết/rubric, trace retrieval offline
+và regression plan; các mục full benchmark và ba generation failures vẫn chưa hoàn thành.
+`artifacts/retrieval_diagnostics.json` không thay thế actual answers/benchmark results.
+Tên remote repo và nộp Codelab chưa xác nhận. Bản nháp có AI hỗ trợ cần học viên
+kiểm tra và diễn đạt lại theo hiểu biết của mình. Việc push Git không thay thế nộp Codelab.
+
 - [README.md](README.md) — Tổng quan bài lab và hướng dẫn khởi động
 - [RUBRIC.md](RUBRIC.md) — Tiêu chí chấm điểm chi tiết và các trường hợp trừ điểm
 - [CHECKPOINTS.md](CHECKPOINTS.md) — Hướng dẫn từng checkpoint và tiêu chuẩn nghiệm thu

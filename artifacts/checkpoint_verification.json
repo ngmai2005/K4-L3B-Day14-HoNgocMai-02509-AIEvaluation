@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-10-01T05:45:52.373148+00:00",
+  "checks": [
+    {
+      "command": [
+        "-m",
+        "pytest",
+        "tests/",
+        "-q"
+      ],
+      "exit_code": 0,
+      "output": "..........................................                               [100%]\n42 passed in 0.05s"
+    },
+    {
+      "command": [
+        "validate_golden_dataset.py"
+      ],
+      "exit_code": 0,
+      "output": "Dataset: D:\\AI20K\\K4-L3B-Day14-HoNgocMai02509-Evaluation\\golden_dataset.json\nCorpus:  D:\\AI20K\\K4-L3B-Day14-HoNgocMai02509-Evaluation\\data\\technology_store\nQA pairs: 20\nDifficulty: easy=5, medium=7, hard=5, adversarial=3\nDocument coverage: 10/10\n\nPASS: dataset structure and evidence provenance are valid.\nNote: semantic quality and true difficulty still require rubric review."
+    }
+  ],
+  "core_files_identical": true,
+  "api_routes_mocked": "PASS",
+  "actual_answers_present": false,
+  "benchmark_results_present": false,
+  "api_last_failure": {
+    "provider": "OpenRouter",
+    "status": 401,
+    "message": "Missing Authentication header",
+    "question_id": "E01"
+  },
+  "checkpoint_status": {
+    "CP0": "environment_ready_api_blocked",
+    "CP1": "complete",
+    "CP2": "complete_core",
+    "CP3": "complete",
+    "CP4": "dataset_and_rubric_complete_benchmark_blocked",
+    "CP5": "offline_draft_complete_real_failure_analysis_pending"
+  }
+}
